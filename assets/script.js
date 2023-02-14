@@ -2,11 +2,10 @@ var choice1 = document.querySelector(".choice1");
 var choice2 = document.querySelector(".choice2");
 var choice3 = document.querySelector(".choice3");
 var choice4 = document.querySelector(".choice4");
+var qBtn = document.querySelector(".btn")
 
-// have a variable store the truth of the clicked item. Then, reference that variable when checking a guess?
 
-
-var question1 = [
+var q1 = [
     {name: "The question goes here!"},
     {ans: "text", truth: false},
     {ans: "text", truth: true},
@@ -14,7 +13,7 @@ var question1 = [
     {ans: "text", truth: false}
 ]
 
-var question2 = [
+var q2 = [
     {name: "The question goes here!"},
     {ans: "text", truth: false},
     {ans: "text", truth: false},
@@ -22,29 +21,67 @@ var question2 = [
     {ans: "text", truth: true}
 ]
 
-var qList = [question1, question2];
+var q3 = [
+    {name: "The question goes here!"},
+    {ans: "text", truth: false},
+    {ans: "text", truth: false},
+    {ans: "text", truth: false},
+    {ans: "text", truth: true}
+]
+
+var q4 = [
+    {name: "The question goes here!"},
+    {ans: "text", truth: false},
+    {ans: "text", truth: false},
+    {ans: "text", truth: false},
+    {ans: "text", truth: true}
+]
+
+var qList = [q1, q2, q3, q4];
+
 
 var index = 0;
 var correctAns = 0;
 var wrongAns = 0;
+var score = 0;
+var secondsLeft = 0;
+
+function startQuiz(){
+    // qBtn.addEventListener needs to hide until the index reaches the end of the questions or the time runs out.
+    // the timer needs to start
+    // the scorebug needs to  become visible.
+}
 
 function renderQuestion(){
 var activeQ = qList[index];
+if (index === (qList.length-1)){
+    // set the quiz button to visisble
+    // store correct answers, wrong answers, and score in the local storage
+    // take the user to the score page
+}
 for (var i = 0; i < 5; i++) {
     if (i === 0){
-        document.querySelector(".questionHere").textContent=activeQ[i].name;
+        document.querySelector(".questionHere").textContent= activeQ[i].name;
     }
     else{
-        document.querySelector(".choice" + i).textContent=activeQ[i].ans;
+        document.querySelector(".choice" + i).textContent= activeQ[i].ans;
         document.querySelector(".choice" + i).setAttribute("truth", activeQ[i].truth)
     }
    }
 }
 
-function checkQuestion(){
-//  I need an event listener for somone clicking on one of the answers. Then when I run checkQuestion I can see the statues of the truth attribute. 
-// Maybe I just add the event listener for each choice individually and then run checkQuestion when clicked and see if it's true or false. 
-// after they click in one of the boxes, I'll run change question
+function checkQuestion(event){
+    var element = event.target;
+    if (element.getAttribute("truth")){
+    correctAns++;
+    changeQuestion();
+    // display right for a few seconds
+    }
+    else {
+    wrongAns++;
+    changeQuestion();
+    // display wrong for a few seconds
+    }
 }
 
 function changeQuestion(){
@@ -52,9 +89,24 @@ function changeQuestion(){
     renderQuestion();
 }
 
+function wrong(){
+    // set a timer and display wrong for a few seconds.
+}
+
+function correct(){
+    // set a timer and display correct for a few seconds.
+}
+
 function endQuiz(){
 
 }
+
+
+choice1.addEventListener('click', checkQuestion);
+choice2.addEventListener('click', checkQuestion);
+choice3.addEventListener('click', checkQuestion);
+choice4.addEventListener('click', checkQuestion);
+
 
 // each question needs a name and then 4 possible answers mixed with booleans
 // what if they are named one, two, three, etc. Have a 'name' property, and then a series of answers.
