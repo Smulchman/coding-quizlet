@@ -55,7 +55,9 @@ header {
 }
 
 .start-button {
+  display: flex;
   text-align: center;
+  justify-content: center;
 }
 
 .card-footer::before {
@@ -86,6 +88,12 @@ header {
   padding: 14px 34px;
   text-align: center;
   cursor: pointer;
+}
+
+.answer-state {
+  font-size: 10px;
+  position: absolute;
+  right: 60%;
 }
 
 button{
