@@ -1,7 +1,15 @@
+var choice1 = document.querySelector(".choice1");
+var choice2 = document.querySelector(".choice2");
+var choice3 = document.querySelector(".choice3");
+var choice4 = document.querySelector(".choice4");
+
+// have a variable store the truth of the clicked item. Then, reference that variable when checking a guess?
+
+
 var question1 = [
     {name: "The question goes here!"},
     {ans: "text", truth: false},
-    {ans: "text", truth: false},
+    {ans: "text", truth: true},
     {ans: "text", truth: false},
     {ans: "text", truth: false}
 ]
@@ -11,7 +19,7 @@ var question2 = [
     {ans: "text", truth: false},
     {ans: "text", truth: false},
     {ans: "text", truth: false},
-    {ans: "text", truth: false}
+    {ans: "text", truth: true}
 ]
 
 var qList = [question1, question2];
@@ -27,17 +35,21 @@ for (var i = 0; i < 5; i++) {
         document.querySelector(".questionHere").textContent=activeQ[i].name;
     }
     else{
-        document.querySelector(".choice").textContent=activeQ[i].ans;
+        document.querySelector(".choice" + i).textContent=activeQ[i].ans;
+        document.querySelector(".choice" + i).setAttribute("truth", activeQ[i].truth)
     }
    }
 }
 
 function checkQuestion(){
-    
+//  I need an event listener for somone clicking on one of the answers. Then when I run checkQuestion I can see the statues of the truth attribute. 
+// Maybe I just add the event listener for each choice individually and then run checkQuestion when clicked and see if it's true or false. 
+// after they click in one of the boxes, I'll run change question
 }
 
 function changeQuestion(){
-
+    index++;
+    renderQuestion();
 }
 
 function endQuiz(){
