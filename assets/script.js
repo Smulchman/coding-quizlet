@@ -1,7 +1,7 @@
-// var choice1 = document.querySelector(".choice1");
-// var choice2 = document.querySelector(".choice2");
-// var choice3 = document.querySelector(".choice3");
-// var choice4 = document.querySelector(".choice4");
+var choice1 = document.querySelector(".choice1");
+var choice2 = document.querySelector(".choice2");
+var choice3 = document.querySelector(".choice3");
+var choice4 = document.querySelector(".choice4");
 
 var timerEl = document.querySelector(".timer-el");
 var scoreEl = document.querySelector(".score-el");
@@ -12,7 +12,7 @@ var qBtn = document.querySelector(".btn")
 
 
 var q1 = [
-    {name: "The question goes here!"},
+    {name: "This is question 1!"},
     {ans: "text", truth: false},
     {ans: "text", truth: true},
     {ans: "text", truth: false},
@@ -20,44 +20,45 @@ var q1 = [
 ]
 
 var q2 = [
-    {name: "The question goes here!"},
-    {ans: "text", truth: false},
-    {ans: "text", truth: false},
-    {ans: "text", truth: false},
-    {ans: "text", truth: true}
+    {name: "This is question 2!"},
+    {ans: "text2", truth: false},
+    {ans: "text2", truth: false},
+    {ans: "text2", truth: false},
+    {ans: "text2", truth: true}
 ]
 
 var q3 = [
-    {name: "The question goes here!"},
-    {ans: "text", truth: false},
-    {ans: "text", truth: false},
-    {ans: "text", truth: false},
-    {ans: "text", truth: true}
+    {name: "This is question 3!"},
+    {ans: "text3", truth: false},
+    {ans: "text3", truth: false},
+    {ans: "text3", truth: false},
+    {ans: "text3", truth: true}
 ]
 
 var q4 = [
-    {name: "The question goes here!"},
-    {ans: "text", truth: false},
-    {ans: "text", truth: false},
-    {ans: "text", truth: false},
-    {ans: "text", truth: true}
+    {name: "This is question 4"},
+    {ans: "text4", truth: false},
+    {ans: "text4", truth: false},
+    {ans: "text4", truth: false},
+    {ans: "text4", truth: true}
 ]
 
 var qList = [q1, q2, q3, q4];
 
 
-var index = 0;
+var index = -1;
 var correctAns = 0;
 var wrongAns = 0;
 var score = 0;
 var secondsLeft = 60;
+var twoSecs = 2;
 
 function startQuiz(){
     // do i need to set the choice blocks to become visible?
-
     qBtn.style.display = 'none';
     scoreEl.style.display = 'block';
     setTime();
+    changeQuestion();
 }
 
 function renderQuestion(){
@@ -75,22 +76,23 @@ for (var i = 0; i < 5; i++) {
 
 function checkQuestion(event){
     var element = event.target;
-    if (element.getAttribute("truth")){
-        correctAns();
+    if (element.getAttribute("truth") === true){
+        correct();
         changeQuestion();
     }
     else {
-        wrongAns();
+        wrong();
         changeQuestion();
     }
 }
 
 function changeQuestion(){
     if (index === (qList.length-1)){
-        qBtn.style.display = 'initial';
-        qBtn.textContent = 'End Quiz';
+        // qBtn.style.display = 'initial';
+        // qBtn.textContent = 'End Quiz';
         // store correct answers, wrong answers, and score in the local storage
         // take the user to the score page
+        endQuiz();
     }
     else {
         index++;
@@ -101,43 +103,47 @@ function changeQuestion(){
 function wrong(){
     wrongAns++;
     // update global timer
-    var timerInterval = setInterval(function() {
-        secondsLeft--;
+    var secondInterval = setInterval(function() {
+        twoSecs--;
         stateEl.textContent = 'Wrong!';
     
-        if(secondsLeft === 0) {
-          clearInterval(timerInterval);
-        // set the element displaying correct to be empty;
-        stateEl.textContent = '';
+        if(twoSecs === 0) {
+            clearInterval(secondInterval);
+            // set the element displaying correct to be empty;
+            stateEl.textContent = '';
+            twoSecs = 2;
         }
-      }, 2000);
+      }, 1000);
 }
 
 function correct(){
     correctAns++;
-    score = (score * 10);
+    score = (correctAns * 10);
     scoreEl.textContent = score;
     // set a timer and display correct for a few seconds.
-    var timerInterval = setInterval(function() {
-        secondsLeft--;
+    var secondInterval = setInterval(function() {
+        twoSecs--;
         stateEl.textContent = 'Correct!';
     
-        if(secondsLeft === 0) {
-            clearInterval(timerInterval);
+        if(twoSecs === 0) {
+            clearInterval(secondInterval);
         // set the element displaying correct to be empty;
             stateEl.textContent = '';
+            twoSecs = 2;
         }
       }, 2000);
 }
 
 function endQuiz(){
+    return;
 // take user to scoreboard page
 }
 
 function setTime() {
     var timerInterval = setInterval(function() {
       secondsLeft--;
-      timeEl.textContent = secondsLeft;
+    //   timerEl.style.display = block;
+      timerEl.textContent = secondsLeft;
   
       if(secondsLeft === 0) {
         clearInterval(timerInterval);
