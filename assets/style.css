@@ -54,6 +54,11 @@ header {
   min-height: 100px;
 }
 
+.choices {
+  /* display: none; */
+  list-style-type: none;
+}
+
 .start-button {
   display: flex;
   text-align: center;

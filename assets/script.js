@@ -5,6 +5,8 @@
 
 var timerEl = document.querySelector(".timer-el");
 var scoreEl = document.querySelector(".score-el");
+var stateEl = document.querySelector(".answer-state");
+var choicesEl = document.querySelector(".choices")
 
 var qBtn = document.querySelector(".btn")
 
@@ -48,9 +50,11 @@ var index = 0;
 var correctAns = 0;
 var wrongAns = 0;
 var score = 0;
-var secondsLeft = 0;
+var secondsLeft = 60;
 
 function startQuiz(){
+    // do i need to set the choice blocks to become visible?
+
     qBtn.style.display = 'none';
     scoreEl.style.display = 'block';
     setTime();
@@ -64,7 +68,7 @@ for (var i = 0; i < 5; i++) {
     }
     else{
         document.querySelector(".choice" + i).textContent= activeQ[i].ans;
-        document.querySelector(".choice" + i).setAttribute("truth", activeQ[i].truth)
+        document.querySelector(".choice" + i).setAttribute("truth", activeQ[i].truth);
     }
    }
 }
@@ -72,10 +76,12 @@ for (var i = 0; i < 5; i++) {
 function checkQuestion(event){
     var element = event.target;
     if (element.getAttribute("truth")){
-    changeQuestion();
+        correctAns();
+        changeQuestion();
     }
     else {
-    changeQuestion();
+        wrongAns();
+        changeQuestion();
     }
 }
 
@@ -85,7 +91,6 @@ function changeQuestion(){
         qBtn.textContent = 'End Quiz';
         // store correct answers, wrong answers, and score in the local storage
         // take the user to the score page
-        // call this at the 
     }
     else {
         index++;
@@ -95,8 +100,17 @@ function changeQuestion(){
 
 function wrong(){
     wrongAns++;
-    // set a timer and display wrong for a few seconds.
     // update global timer
+    var timerInterval = setInterval(function() {
+        secondsLeft--;
+        stateEl.textContent = 'Wrong!';
+    
+        if(secondsLeft === 0) {
+          clearInterval(timerInterval);
+        // set the element displaying correct to be empty;
+        stateEl.textContent = '';
+        }
+      }, 2000);
 }
 
 function correct(){
@@ -106,21 +120,21 @@ function correct(){
     // set a timer and display correct for a few seconds.
     var timerInterval = setInterval(function() {
         secondsLeft--;
-        // set an element to display 'correct'
+        stateEl.textContent = 'Correct!';
     
         if(secondsLeft === 0) {
-          clearInterval(timerInterval);
+            clearInterval(timerInterval);
         // set the element displaying correct to be empty;
+            stateEl.textContent = '';
         }
       }, 2000);
 }
 
 function endQuiz(){
-
+// take user to scoreboard page
 }
 
 function setTime() {
-    // Sets interval in variable
     var timerInterval = setInterval(function() {
       secondsLeft--;
       timeEl.textContent = secondsLeft;
@@ -129,7 +143,7 @@ function setTime() {
         clearInterval(timerInterval);
         endQuiz();
       }
-    }, 60000);
+    }, 1000);
   }
 
 
