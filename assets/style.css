@@ -54,7 +54,7 @@ header {
   min-height: 100px;
 }
 
-.card-footer {
+.start-button {
   text-align: center;
 }
 
@@ -97,7 +97,7 @@ button[disabled] {
   float: right;
 }
 
-#password {
+/* #password {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -116,7 +116,7 @@ button[disabled] {
   border-radius: 6px;
   resize: none;
   overflow: hidden;
-}
+} */
 
 @media (max-width: 690px) {
   .btn {
