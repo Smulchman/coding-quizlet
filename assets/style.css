@@ -1,3 +1,5 @@
+/* note: this stylesheet was taken from a previous assignment and built upon */
+
 *,
 *::before,
 *::after {
@@ -133,9 +135,6 @@ button{
     padding: 10px 15px;
   }
 
-  #password {
-    font-size: 1rem;
-  }
 }
 
 @media (max-width: 500px) {

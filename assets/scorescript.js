@@ -34,7 +34,7 @@ function renderScores() {
 
 
 
-
+// this function is to 
 function saveScore() {
     // add a list element for the new saved score
     var savedScore = {
@@ -54,6 +54,7 @@ function saveScore() {
 //   event listener for click on btn to run savescore
 sBtn.addEventListener('click', saveScore);
 
+// this function exists to populate the score list upon loading the page
 function init() {
     renderScores();
   }
