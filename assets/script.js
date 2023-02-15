@@ -103,7 +103,7 @@ function changeQuestion(){
 
 function wrong(){
     wrongAns++;
-    secondsleft -= 10;
+    secondsLeft -= 10;
     stateEl.textContent = 'Wrong!';
     // update global timer
     var secondInterval = setInterval(function() {
@@ -135,14 +135,15 @@ function correct(){
 }
 
 function endQuiz(){
-    return;
-// take user to scoreboard page
+    // score = (score + (secondsLeft * .1));
+    localStorage.setItem("recentScore", JSON.stringify(score));
+    window.location.replace("https://smulchman.github.io/coding-quizlet/scoreboard");
+    // take user to scoreboard page
 }
 
 function setTime() {
     var timerInterval = setInterval(function() {
       secondsLeft--;
-    //   timerEl.style.display = block;
       timerEl.textContent = secondsLeft;
   
       if(secondsLeft === 0) {
