@@ -140,7 +140,7 @@ function correct(){
 function endQuiz(){
     // I considered having time effect the score: score = (score + (secondsLeft * .1));
     localStorage.setItem("recentScore", JSON.stringify(score));
-    window.location.replace("https://smulchman.github.io/coding-quizlet/scoreboard");
+    window.location.replace("https://smulchman.github.io/coding-quizlet/scoreboard.html");
     // takes user to the github page for the scoreboard html file
 }
 
