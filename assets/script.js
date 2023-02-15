@@ -37,7 +37,7 @@ var q3 = [
 ]
 
 var q4 = [
-    {name: "One of these items has an attribute value being set to true. Which one is it?"},
+    {name: "One of these items has an attribute value designating it as the correct answer. Which one is it?"},
     {ans: "This one!", truth: "false"},
     {ans: "Totally this one, for sure!", truth: "false"},
     {ans: "It's not this one, don't waste your time!", truth: "false"},
