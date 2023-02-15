@@ -59,7 +59,7 @@ header {
 }
 
 .choices {
-  /* display: none; */
+  display: none;
   list-style-type: none;
 }
 
@@ -103,7 +103,6 @@ header {
   font-size: 10px;
   position: absolute;
   right: 60%;
-  display: none;
 }
 
 button{

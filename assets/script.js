@@ -13,34 +13,34 @@ var qBtn = document.querySelector(".btn")
 
 var q1 = [
     {name: "This is question 1!"},
-    {ans: "text", truth: false},
-    {ans: "text", truth: true},
-    {ans: "text", truth: false},
-    {ans: "text", truth: false}
+    {ans: "text1", truth: "false"},
+    {ans: "text1", truth: "true"},
+    {ans: "text1", truth: "false"},
+    {ans: "text1", truth: "false"}
 ]
 
 var q2 = [
     {name: "This is question 2!"},
-    {ans: "text2", truth: false},
-    {ans: "text2", truth: false},
-    {ans: "text2", truth: false},
-    {ans: "text2", truth: true}
+    {ans: "text2", truth: "false"},
+    {ans: "text2", truth: "true"},
+    {ans: "text2", truth: "false"},
+    {ans: "text2", truth: "false"}
 ]
 
 var q3 = [
     {name: "This is question 3!"},
-    {ans: "text3", truth: false},
-    {ans: "text3", truth: false},
-    {ans: "text3", truth: false},
-    {ans: "text3", truth: true}
+    {ans: "text3", truth: "false"},
+    {ans: "text3", truth: "false"},
+    {ans: "text3", truth: "false"},
+    {ans: "text3", truth: "true"}
 ]
 
 var q4 = [
     {name: "This is question 4"},
-    {ans: "text4", truth: false},
-    {ans: "text4", truth: false},
-    {ans: "text4", truth: false},
-    {ans: "text4", truth: true}
+    {ans: "text4", truth: "false"},
+    {ans: "text4", truth: "false"},
+    {ans: "text4", truth: "false"},
+    {ans: "text4", truth: "true"}
 ]
 
 var qList = [q1, q2, q3, q4];
@@ -51,10 +51,10 @@ var correctAns = 0;
 var wrongAns = 0;
 var score = 0;
 var secondsLeft = 60;
-var twoSecs = 2;
+var oneSecs = 1;
 
 function startQuiz(){
-    // do i need to set the choice blocks to become visible?
+    choicesEl.style.display = 'block';
     qBtn.style.display = 'none';
     scoreEl.style.display = 'block';
     setTime();
@@ -76,7 +76,8 @@ for (var i = 0; i < 5; i++) {
 
 function checkQuestion(event){
     var element = event.target;
-    if (element.getAttribute("truth") === true){
+    console.log(element.getAttribute("truth"))
+    if (element.getAttribute("truth") === "true"){
         correct();
         changeQuestion();
     }
@@ -102,16 +103,16 @@ function changeQuestion(){
 
 function wrong(){
     wrongAns++;
+    secondsleft -= 10;
+    stateEl.textContent = 'Wrong!';
     // update global timer
     var secondInterval = setInterval(function() {
-        twoSecs--;
-        stateEl.textContent = 'Wrong!';
-    
-        if(twoSecs === 0) {
+        oneSecs--;
+        if(oneSecs === 0) {
             clearInterval(secondInterval);
             // set the element displaying correct to be empty;
             stateEl.textContent = '';
-            twoSecs = 2;
+            oneSecs = 1;
         }
       }, 1000);
 }
@@ -120,18 +121,17 @@ function correct(){
     correctAns++;
     score = (correctAns * 10);
     scoreEl.textContent = score;
+    stateEl.textContent = 'Correct!';
     // set a timer and display correct for a few seconds.
     var secondInterval = setInterval(function() {
-        twoSecs--;
-        stateEl.textContent = 'Correct!';
-    
-        if(twoSecs === 0) {
+        oneSecs--;
+        if(oneSecs === 0) {
             clearInterval(secondInterval);
         // set the element displaying correct to be empty;
             stateEl.textContent = '';
-            twoSecs = 2;
+            oneSecs = 1;
         }
-      }, 2000);
+      }, 1000);
 }
 
 function endQuiz(){
